@@ -1,0 +1,47 @@
+# ==============================================================================
+# SMS Gateway (FastAPI / Python) — .gitignore
+# ==============================================================================
+
+# Python bytecode & environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment & secrets
+.env
+.env.*
+*.env
+!.env.example
+!.env.*.example
+
+# Testing, linting, & coverage
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+coverage/
+htmlcov/
+.hypothesis/
+.tox/
+
+# Logs & packages
+*.log
+*.egg-info/
+.eggs/
+
+# OS / Editor noise
+.DS_Store
+*.DS_Store
+[Tt]humbs.db
+ehthumbs.db
+[Dd]esktop.ini
+.idea/
+.vscode/

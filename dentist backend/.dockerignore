@@ -1,0 +1,17 @@
+bin/
+obj/
+[Bb]in/
+[Oo]bj/
+.git/
+.vs/
+*.user
+*.suo
+*.userprefs
+appsettings.Local.json
+appsettings.Production.json
+appsettings.*.local.json
+.env
+.env.*
+*.env
+!.env.example
+TestResults/

@@ -1,0 +1,45 @@
+# ==============================================================================
+# Dr. Nadia Clinic Landing Page (Vite / React / Tailwind) — .gitignore
+# ==============================================================================
+
+# Dependencies & build output
+node_modules/
+dist/
+dist-ssr/
+build/
+.next/
+out/
+.vite/
+coverage/
+.eslintcache
+*.local
+
+# Environment & secrets
+.env
+.env.*
+*.env
+!.env.example
+!.env.*.example
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# OS / Editor noise
+.DS_Store
+*.DS_Store
+[Tt]humbs.db
+ehthumbs.db
+[Dd]esktop.ini
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

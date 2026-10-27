@@ -1,0 +1,44 @@
+# Auto-detect text files and normalize line endings on checkout/commit
+* text=auto
+
+# Windows scripts must have CRLF line endings
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Shell scripts must have LF line endings for Linux/Docker compatibility
+*.sh text eol=lf
+
+# C# / .NET
+*.cs text=auto diff=csharp
+*.csproj text=auto
+*.sln text=auto eol=crlf
+*.props text=auto
+*.targets text=auto
+
+# JavaScript / TypeScript / Frontend
+*.js text=auto
+*.jsx text=auto
+*.ts text=auto
+*.tsx text=auto
+*.json text=auto
+*.css text=auto
+*.html text=auto
+*.md text=auto
+
+# Python
+*.py text=auto diff=python
+
+# Binary assets - prevent line-ending conversion or corruption
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.dll binary
+*.exe binary

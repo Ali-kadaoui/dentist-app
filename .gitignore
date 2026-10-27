@@ -1,0 +1,92 @@
+# ==============================================================================
+# Dentist Clinic Full-Stack App — Root .gitignore
+# ==============================================================================
+
+# Environment & secrets
+.env
+.env.*
+*.env
+!.env.example
+!.env.*.example
+*.local
+
+# AI Agents & IDE metadata
+.agents/
+.codegraph/
+.gemini/
+.aider*
+.cline*
+.cursor*
+.idea/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.swp
+*~
+
+# Operating System files
+[Tt]humbs.db
+ehthumbs.db
+[Dd]esktop.ini
+.DS_Store
+*.DS_Store
+.Spotlight-V100
+.Trashes
+
+# .NET / C#
+bin/
+obj/
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+publish/
+TestResults/
+.vs/
+*.userprefs
+appsettings.Local.json
+appsettings.Production.json
+appsettings.*.local.json
+
+# Node / Vite / Next.js / Frontend
+node_modules/
+dist/
+dist-ssr/
+build/
+.next/
+out/
+.vite/
+.turbo/
+coverage/
+.eslintcache
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Python / FastAPI / SMS Gateway
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+coverage/
+htmlcov/
+.hypothesis/
+.tox/
+*.egg-info/
+.eggs/
+*.log

@@ -1,0 +1,63 @@
+# Dentist dashboard — PostgreSQL + API + static frontend.
+#
+#   docker compose up -d db          # database only (for `dotnet run` on the host)
+#   docker compose up --build        # full stack: http://localhost:8081
+#
+# The Python SMS gateway is intentionally not defined here: it needs the USB
+# modem's COM port, so it runs on the host. The API reaches it through
+# host.docker.internal:8000 (override SmsGateway__BaseUrl for a remote gateway).
+#
+# Migrations: the api service sets Database__MigrateOnStartup=true and applies
+# them on boot, so an empty volume provisions itself. To migrate by hand from the
+# host instead, run `dotnet ef database update` against localhost:5432.
+
+name: dentist
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: dentist-db
+    environment:
+      POSTGRES_DB: dentist
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    ports:
+      # POSTGRES_PORT exists for machines that already run PostgreSQL on 5432:
+      #   $env:POSTGRES_PORT = 5433; docker compose up -d db
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - dentist-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d dentist"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  api:
+    build:
+      context: "./dentist backend"
+    container_name: dentist-api
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: http://+:8080
+      # Applies pending migrations on boot, so an empty volume provisions itself.
+      Database__MigrateOnStartup: "true"
+      ConnectionStrings__Postgres: Host=db;Port=5432;Database=dentist;Username=postgres;Password=${POSTGRES_PASSWORD:-postgres}
+      Cors__AllowedOrigins: http://localhost:5173,http://localhost:8081
+      SmsGateway__BaseUrl: ${SMS_GATEWAY_BASE_URL:-http://host.docker.internal:8000}
+      SmsGateway__ApiKey: ${SMS_GATEWAY_API_KEY:-}
+      SmsGateway__TimeoutSeconds: "40"
+      SmsGateway__MaxMessageLength: "160"
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+
+volumes:
+  dentist-db:
+
